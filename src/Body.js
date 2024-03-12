@@ -3,7 +3,21 @@ import "./body.css";
 import { messages } from "./utils";
 
 const Body = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
+
+  const handlePrevious = () => {
+    setStep(step - 1);
+    if (step <= 1) {
+      setStep(1);
+    }
+  };
+
+  const handleNext = () => {
+    setStep(step + 1);
+    if (step >= 3) {
+      setStep(3);
+    }
+  };
 
   return (
     <div>
@@ -17,8 +31,8 @@ const Body = () => {
           Step {step} : {messages[step - 1]}
         </div>
         <div className="buttons">
-          <button>Previous</button>
-          <button>Next</button>
+          <button onClick={handlePrevious}>Previous</button>
+          <button onClick={handleNext}>Next</button>
         </div>
       </div>
     </div>
