@@ -4,6 +4,7 @@ import { messages } from "./utils";
 
 const Body = () => {
   const [step, setStep] = useState(1);
+  const [close, setClose] = useState(true);
 
   const handlePrevious = () => {
     setStep(step - 1);
@@ -19,22 +20,31 @@ const Body = () => {
     }
   };
 
+  const handleClose = () => {
+    setClose(!close);
+  };
+
   return (
     <div>
-      <div className="container">
-        <div className="list">
-          <div className="active">1</div>
-          <div className={step >= 2 ? "active" : ""}>2</div>
-          <div className={step >= 3 ? "active" : ""}>3</div>
-        </div>
-        <div className="content">
-          Step {step} : {messages[step - 1]}
-        </div>
-        <div className="buttons">
-          <button onClick={handlePrevious}>Previous</button>
-          <button onClick={handleNext}>Next</button>
-        </div>
+      <div className="cross">
+        <span onClick={handleClose}> X </span>{" "}
       </div>
+      {close && (
+        <div className="container">
+          <div className="list">
+            <div className="active">1</div>
+            <div className={step >= 2 ? "active" : ""}>2</div>
+            <div className={step >= 3 ? "active" : ""}>3</div>
+          </div>
+          <div className="content">
+            Step {step} : {messages[step - 1]}
+          </div>
+          <div className="buttons">
+            <button onClick={handlePrevious}>Previous</button>
+            <button onClick={handleNext}>Next</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
